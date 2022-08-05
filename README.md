@@ -1,8 +1,5 @@
-# AirBnB Clone ― The ALX-Holberton BnB
-![hbnb](https://user-images.githubusercontent.com/88311316/151070609-19608294-829e-408b-b2b3-5d1f2873f1e3.png)
-
 ## Description of the project
-The ALX-Holberton B&B sums up the implementation of my four months of studies at the ALX-Holberton School - the fullstack software engineering program. The goal of the project is to deploy a replica of the Airbnb Website using my server. The final version of this project will have:
+The ALX sums up the implementation of my four months of studies at the ALX School - the fullstack software engineering program. The goal of the project is to deploy a replica of the Airbnb Website using my server. The final version of this project will have:
 
 **1.  A command interpreter to manipulate data without a visual interface, like a shell (for development and debugging)**
 </br>
