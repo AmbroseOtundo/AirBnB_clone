@@ -31,7 +31,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """Return specific string format"""
+        """Return a specific string format"""
         return '[{}] ({}) {}'.format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
