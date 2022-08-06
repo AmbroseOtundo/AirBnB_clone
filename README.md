@@ -1,5 +1,4 @@
-## Description of the project
-The ALX sums up the implementation of my four months of studies at the ALX School - the fullstack software engineering program. The goal of the project is to deploy a replica of the Airbnb Website using my server. The final version of this project will have:
+## Description of the project The goal of the project is to deploy a replica of the Airbnb Website using my server. The final version of this project will have:
 
 **1.  A command interpreter to manipulate data without a visual interface, like a shell (for development and debugging)**
 </br>
