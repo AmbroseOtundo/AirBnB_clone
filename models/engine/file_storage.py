@@ -1,58 +1,49 @@
 #!/usr/bin/python3
-"""A class that inherence from BaseModel"""
+"""
+Contains FileStorage class
+"""
+
 
 import json
 from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
+
+classes = {"BaseModel": BaseModel}
 
 
 class FileStorage:
-    """
-    Serializes instances to a JSON file
-    and deserializes JSON file to instances
-    """
+    """serializes objects to JSON strings
+    deserializes JSON strings back to objects"""
+
+    # string - path to JSON file
     __file_path = "file.json"
+    # dictionary - (empty) but will store all objects by <class name>.id
     __objects = {}
 
     def all(self):
-        """return a dictionary of objects"""
+        """returns the dictionary __objects"""
         return self.__objects
 
     def new(self, obj):
-        """save in __objects an object"""
-        stri = obj.__class__.__name__
-        stri = stri + "." + obj.id
-        self.__objects.setdefault(stri, obj)
+        """sets in __objects the obj with key <obj class>.id"""
+        if obj is not None:
+            key = obj.__class__.__name__ + "." + obj.id
+            self.__objects[key] = obj
 
     def save(self):
-        """Save in json file a serialized dictionary"""
-        otro = {}
+        """serializes __objects to the JSON file (path:__file_path)"""
+        object_to_json = {}
         for key in self.__objects:
-            otro.setdefault(key, self.__objects[key].to_dict())
-        jdic = json.dumps(otro)
-        with open(self.__file_path, "w") as f:
-            f.write(jdic)
+            object_to_json[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, 'w') as f:
+            json.dump(object_to_json, f)
 
     def reload(self):
-        """load from json file gets a dictionary of
-        dictionary and change to a dictionary of objects"""
-        class_list = [BaseModel, User, Place, State, City, Amenity, Review]
+        """deserialize the JSON file to __objects
+        only if file (__file_path) exists"""
         try:
-            otro = {}
-            otro2 = {}
-            with open(self.__file_path, "r") as f:
-                otro = json.load(f)
-            for key in otro:
-                y = otro[key]["__class__"]
-                for idx, item in enumerate(class_list):
-                    if y in str(item):
-                        a = class_list[idx](**otro[key])
-                otro2.setdefault(key, a)
-            self.__objects = otro2
-        except:
+            with open(self.__file_path, 'r') as f:
+                jo = json.load(f)
+            for key in jo:
+                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+        except Exception:
             pass
